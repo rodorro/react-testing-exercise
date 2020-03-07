@@ -8,7 +8,7 @@
     "start:dev": "webpack-dev-server",
     "start:mock-server": "cd ./server && npm start",
     "postinstall": "cd ./server && npm i",
-    "test": "jest --verbose",
+    "test": "jest --verbose --c ./config/test/jest.json",
     "test:watch": "npm test -- --watchAll -i"
   },
   "author": "",
@@ -44,8 +44,5 @@
     "react-dom": "^16.12.0",
     "react-final-form": "^6.3.5",
     "react-router-dom": "^5.1.2"
-  },
-  "jest": {
-    "preset": "ts-jest"
   }
 }
