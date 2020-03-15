@@ -1,5 +1,6 @@
 {
     "rootDir": "../../",
     "preset": "ts-jest",
-    "restoreMocks": true
+    "restoreMocks": true,
+    "moduleDirectories": ["<rootDir>/src", "node_modules"]
 }
