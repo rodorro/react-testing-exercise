@@ -10,10 +10,9 @@ export const TextField: React.FunctionComponent<Props> = props => {
   const {
     input: { name, onChange, value, ...restInput },
     meta,
+    'data-testid': dataTestId,
     ...rest
   } = props;
-
-  const dataTestId = props['data-testid'];
 
   const showError =
     ((meta.submitError && !meta.dirtySinceLastSubmit) || meta.error) &&
