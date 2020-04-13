@@ -1,7 +1,5 @@
 import { renderHook, act }  from '@testing-library/react-hooks';
 import { useHotelCollection } from './hotel-collection.hook';
-import { mapFromApiToVm } from './hotel-collection.mapper';
-import { mapToCollection } from '../../common/mappers/collection.mapper';
 import * as api from './hotel-collection.api';
 import * as commonMapper from 'common/mappers';
 import * as mapper from './hotel-collection.mapper';
@@ -72,12 +70,8 @@ describe('Hotel collection hook tests', () => {
         ];
 
         const getHotelColecctionStub = jest.spyOn(api, 'getHotelCollection').mockResolvedValue(hotels);
-
         const mapToCollectionStub = jest.spyOn(commonMapper, 'mapToCollection');
-  
         const mapFromApiToVmStub = jest.spyOn(mapper, 'mapFromApiToVm');
-
-        // const hotelsMapped = mapToCollection(hotels, mapFromApiToVm);  
 
         // Act
         const { result, waitForNextUpdate } = renderHook(() => useHotelCollection());
