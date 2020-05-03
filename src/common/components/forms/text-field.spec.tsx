@@ -126,7 +126,7 @@ describe('TextField component tests', () => {
     
         // Assert
         expect(textFieldDiv).toBeInTheDocument();
-        expect(textFieldDiv.childElementCount).not.toStrictEqual(2);
-        expect(errorElement.className).not.toStrictEqual("MuiFormHelperText-root Mui-error");
+        expect(textFieldDiv.childElementCount).toStrictEqual(1);
+        expect(errorElement.className).toEqual(undefined);
     });    
 });
