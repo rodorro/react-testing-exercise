@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { TextField }  from './text-field';
+import { FieldInputProps } from 'react-final-form';
 
 describe('TextField component tests', () => {
     it('it should display the text field', () => {
@@ -21,6 +22,7 @@ describe('TextField component tests', () => {
                 multiple: false,
             },
             meta: meta,
+            textFieldDiv: 'textFieldDiv',
             'data-testid':'text-field'
         };
 
@@ -53,6 +55,7 @@ describe('TextField component tests', () => {
                 multiple: false,
             },
             meta: meta,
+            textFieldDiv: 'textFieldDiv',
             'data-testid':'text-field'
         };
 
@@ -69,5 +72,61 @@ describe('TextField component tests', () => {
         // Assert
         expect(inputElement).toBeInTheDocument();
         expect(props.input.onChange).toHaveBeenCalled();
+    });
+
+    it('should display error when meta.touched is true and error equal test error', () => {
+        // Arrange
+        const props = {
+          input: {
+            name: "inputText",
+            value: "",
+            onBlur: jest.fn(),
+            onChange: jest.fn(),
+            onFocus: jest.fn()
+          } as FieldInputProps<any,any>,
+          meta: {
+            touched: true,
+            error: 'test error',
+          },
+          textFieldDiv: 'textFieldDiv',
+        };
+    
+        // Act
+        const { getByTestId } = render(<TextField {...props} />);
+        const textFieldDiv = getByTestId("textFieldDiv") as HTMLDivElement;
+        const errorElement = textFieldDiv.childNodes[1] as HTMLParagraphElement;
+    
+        // Assert
+        expect(textFieldDiv).toBeInTheDocument();
+        expect(textFieldDiv.childElementCount).toStrictEqual(2);
+        expect(errorElement.className).toStrictEqual("MuiFormHelperText-root Mui-error");
+    });
+
+    it('should not display error when meta.touched is false and error equal test error', () => {
+        // Arrange
+        const props = {
+          input: {
+            name: "inputText",
+            value: "",
+            onBlur: jest.fn(),
+            onChange: jest.fn(),
+            onFocus: jest.fn()
+          } as FieldInputProps<any,any>,
+          meta: {
+            touched: false,
+            error: 'test error',
+          },
+          textFieldDiv: 'textFieldDiv',
+        };
+    
+        // Act
+        const { getByTestId } = render(<TextField {...props} />);
+        const textFieldDiv = getByTestId("textFieldDiv") as HTMLDivElement;
+        const errorElement = textFieldDiv.childNodes[1] as HTMLParagraphElement;
+    
+        // Assert
+        expect(textFieldDiv).toBeInTheDocument();
+        expect(textFieldDiv.childElementCount).not.toStrictEqual(2);
+        expect(errorElement.className).not.toStrictEqual("MuiFormHelperText-root Mui-error");
     });    
 });

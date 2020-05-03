@@ -3,6 +3,7 @@ import { FieldRenderProps } from 'react-final-form';
 import TextFieldMui from '@material-ui/core/TextField';
 
 interface Props extends FieldRenderProps<any, any> {
+  textFieldDiv: string
   'data-testid'?: string
 }
 
@@ -10,6 +11,7 @@ export const TextField: React.FunctionComponent<Props> = props => {
   const {
     input: { name, onChange, value, ...restInput },
     meta,
+    textFieldDiv,
     'data-testid': dataTestId,
     ...rest
   } = props;
@@ -20,6 +22,7 @@ export const TextField: React.FunctionComponent<Props> = props => {
 
   return (
     <TextFieldMui
+      data-testid={textFieldDiv}
       {...rest}
       name={name}
       error={showError}
